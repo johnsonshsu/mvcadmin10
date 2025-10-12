@@ -1,0 +1,22 @@
+@{
+    var formSecurity = SessionService.FormSecurity;
+    bool bln_valid = (formSecurity == null) ? false : formSecurity.IsEdit;
+    if (SessionService.IsReadonlyMode)
+    { bln_valid = false; }
+    else
+    {
+        if (AppService.DebugMode)
+        { bln_valid = true; }
+        else
+        {
+            if (bln_valid && SessionService.IsFormMode)
+            { if (SessionService.IsFormLocked || SessionService.IsConfirm || SessionService.IsCancel) bln_valid = false; }
+        }
+    }
+}
+@if (bln_valid)
+{
+    @Html.ActionLink(SessionService.GetActionName(enAction.Edit), ActionService.Edit, ActionService.Controller, new
+    { area = ActionService.Area, id = SessionService.RowId }, new
+    { @class = "btn btn-success" })
+}
