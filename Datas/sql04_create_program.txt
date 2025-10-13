@@ -118,6 +118,7 @@ BEGIN
 	--宣告變數
 	DECLARE @Id int = 0
 	DECLARE @seq int = 1 --目前最大流水序號
+	DECLARE @IsCancel bit = 0 -- 作廢
 	DECLARE @SheetNo nvarchar(50) = '' --表單編號
 	DECLARE @FindNo nvarchar(50) = '' --尋找編號
 	DECLARE @TypeNo nvarchar(50) = '' --庫存類別
@@ -216,6 +217,32 @@ BEGIN
 				CLOSE update_cursor;  
 				DEALLOCATE update_cursor;
 			END
+		END
+	END
+
+	--庫存單據作廢，異動庫存現況
+	IF (@Command = 'UPDATE')
+	BEGIN
+		SET @IsCancel = (SELECT IsCancel FROM inserted)
+		IF (UPDATE(IsCancel) AND @IsCancel = 1)
+		BEGIN
+			SET @Id = (SELECT Id FROM inserted)
+			SET @BaseNo = (SELECT BaseNo FROM inserted)
+			SET @SheetCode = (SELECT SheetCode FROM inserted)
+			SET @WareHouseNo = (SELECT WareHouseNo FROM inserted)
+			DECLARE update_cursor CURSOR FOR 
+				SELECT ProductNo , Qty FROM InventorysDetail WHERE ParentNo = @BaseNo
+			OPEN update_cursor  
+			FETCH NEXT FROM update_cursor INTO  @ProductNo , @Qty
+			WHILE @@FETCH_STATUS = 0  
+			BEGIN  
+				IF (@SheetCode = 'I') SET @Qty *= -1
+				EXEC dbo.sp_count_inventory @WareHouseNo , @ProductNo , @Qty
+
+				FETCH NEXT FROM update_cursor INTO  @ProductNo , @Qty
+			END
+			CLOSE update_cursor;  
+			DEALLOCATE update_cursor;
 		END
 	END
 END
