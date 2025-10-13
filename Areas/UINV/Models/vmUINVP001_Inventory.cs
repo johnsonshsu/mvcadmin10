@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 
 namespace mvcadmin10.Models
 {
-    /// <summary>
-    /// UINVP002 - 進貨入庫單 ViewModel
-    /// </summary>
     public class vmUINVP001_Inventory : BaseClass
     {
         /// <summary>

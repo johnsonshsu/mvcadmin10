@@ -8,7 +8,12 @@ namespace mvcadmin10.Models
     [ModelMetadataType(typeof(z_metaWarehouses))]
     public partial class Warehouses
     {
-
+        [NotMapped]
+        [Display(Name = "列號")]
+        public int RowNo { get; set; }
+        [NotMapped]
+        [Display(Name = "庫存量")]
+        public int Qty { get; set; }
     }
 }
 

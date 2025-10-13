@@ -1,4 +1,4 @@
-﻿@model mvcadmin10.Models.vmUINVP003_InvStatus
+﻿@model mvcadmin10.Models.vmUINVP004_WarehouseStatus
 
 @{
     ViewData["Title"] = SessionService.PrgName;
@@ -21,10 +21,10 @@
         <div class="row">
             <div class="col-md-8">
                 <span class="text-dark fw-bold">
-                    @Html.DisplayNameFor(m => m.InvMastersModel.ProductNo)：
+                    @Html.DisplayNameFor(m => m.InvMastersModel.WarehouseNo)：
                 </span>
                 <span class="text-dark">
-                    @Html.DisplayFor(m => m.InvMastersModel.ProductNo)
+                    @Html.DisplayFor(m => m.InvMastersModel.WarehouseNo)
                 </span>
             </div>
             <div class="col-md-4">
@@ -39,10 +39,10 @@
         <div class="row">
             <div class="col-md-12">
                 <span class="text-dark fw-bold">
-                    @Html.DisplayNameFor(m => m.InvMastersModel.ProductName)：
+                    @Html.DisplayNameFor(m => m.InvMastersModel.WarehouseName)：
                 </span>
                 <span class="text-dark">
-                    @Html.DisplayFor(m => m.InvMastersModel.ProductName)
+                    @Html.DisplayFor(m => m.InvMastersModel.WarehouseName)
                 </span>
             </div>
         </div>

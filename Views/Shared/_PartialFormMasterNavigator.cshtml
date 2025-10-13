@@ -12,7 +12,7 @@
 new { area = ActionService.Area },
 new { @class = str_class })
 @{
-    str_class = (int_page == 1) ? str_button + " disabled" : str_button;
+    str_class = (int_page <= 1) ? str_button + " disabled" : str_button;
 }
 @Html.ActionLink(SessionService.GetActionName(enAction.First), ActionService.First, ActionService.Controller,
 new { area = ActionService.Area },

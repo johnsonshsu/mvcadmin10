@@ -614,13 +614,6 @@ AS
     WHERE (BaseNo = N'Calendar')
 GO
 
-CREATE VIEW [dbo].[vi_CodeCloseDate]
-AS
-    SELECT Id, IsEnabled, BaseNo, ParentNo, SortNo, CodeNo, CodeName, CodeValue, Remark
-    FROM dbo.CodeDatas
-    WHERE (BaseNo = N'CloseDate')
-GO
-
 CREATE VIEW [dbo].[vi_CodeCompany]
 AS
     SELECT Id, IsEnabled, BaseNo, ParentNo, SortNo, CodeNo, CodeName, CodeValue, Remark

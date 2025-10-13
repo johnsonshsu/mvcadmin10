@@ -3,17 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace mvcadmin10.Areas.Mis.Controllers
 {
     /// <summary>
-    /// UORGP003 商品庫存現況查詢
+    /// UINVP004 倉庫庫存現況查詢
     /// </summary>
     [Area("UINV")]
-    public class UINVP003_InvStatusController : BaseAdminController
+    public class UINVP004_WarehouseStatusController : BaseAdminController
     {
         /// <summary>
         /// 控制器建構子
         /// </summary>
         /// <param name="configuration">環境設定物件</param>
         /// <param name="entities">EF資料庫管理物件</param>
-        public UINVP003_InvStatusController(IConfiguration configuration, dbEntities entities)
+        public UINVP004_WarehouseStatusController(IConfiguration configuration, dbEntities entities)
         {
             db = entities;
             Configuration = configuration;
@@ -52,15 +52,15 @@ namespace mvcadmin10.Areas.Mis.Controllers
         [Security(Mode = enSecurityMode.Display)]
         public ActionResult Index(int id = 0)
         {
-            using var sqlData = new z_sqlInvMasters();
-            if (SessionService.PageMaster == -1) sqlData.SetLastData(); //未指定那一筆時，取得最後一筆表頭資料
+            using var sqlData = new z_sqlWarehouses();
+            if (SessionService.PageMaster == -1) sqlData.SetFirstData(); //未指定那一筆時，取得第一筆表頭資料
 
             //設定目前頁面動作名稱、子動作名稱、動作卡片大小
             ActionService.SetActionName(enAction.Index);
             ActionService.SetSubActionName();
             ActionService.SetActionCardSize(enCardSize.Max);
             //取得資料列表集合
-            using var model = new vmUINVP003_InvStatus();
+            using var model = new vmUINVP004_WarehouseStatus();
             //設定錯誤訊息文字
             SetIndexErrorMessage();
             //設定 ViewBag 及 TempData物件
@@ -85,7 +85,7 @@ namespace mvcadmin10.Areas.Mis.Controllers
             ActionService.SetActionName(enAction.List);
             ActionService.SetSubActionName();
             ActionService.SetActionCardSize(enCardSize.Max);
-            using var inv = new z_sqlInvMasters();
+            using var inv = new z_sqlWarehouses();
             var model = inv.GetDataList(SessionService.SearchText).ToPagedList(id, 10);
             ViewBag.SearchText = SessionService.SearchText;
             return View(model);
@@ -100,9 +100,9 @@ namespace mvcadmin10.Areas.Mis.Controllers
         [Security(Mode = enSecurityMode.Display)]
         public override IActionResult Select(int id = 0)
         {
-            using var inv = new z_sqlInvMasters();
+            using var inv = new z_sqlWarehouses();
             var model = inv.GetData(id);
-            inv.SetBaseNo(model.BaseNo);
+            inv.SetBaseNo(model.WarehouseNo);
             return RedirectToAction(ActionService.Index, ActionService.Controller, new { area = ActionService.Area });
         }
 
@@ -115,7 +115,7 @@ namespace mvcadmin10.Areas.Mis.Controllers
         [Security(Mode = enSecurityMode.Display)]
         public override IActionResult Navigation(string id)
         {
-            var sqlData = new z_sqlInvMasters();
+            var sqlData = new z_sqlWarehouses();
             if (id == "First")
                 sqlData.SetFirstData();
             else if (id == "Prior")
@@ -149,14 +149,14 @@ namespace mvcadmin10.Areas.Mis.Controllers
             enAction action = (id == 0) ? enAction.Create : enAction.Edit;
             ActionService.SetActionName(action);
             //取得新增或修改的資料結構及資料
-            using var sqlMaster = new z_sqlInvMasters();
+            using var sqlMaster = new z_sqlWarehouses();
             using var sqlDetail = new z_sqlInvDetails();
             var masterModel = sqlMaster.GetMasterData();
             var detailModel = sqlDetail.GetData(id);
             //新增預設值
             if (id == 0)
             {
-                detailModel.ProductNo = masterModel.ProductNo;
+                detailModel.WareHouseNo = masterModel.WarehouseNo;
                 detailModel.Qty = 1;
             }
             return View(detailModel);
@@ -198,7 +198,7 @@ namespace mvcadmin10.Areas.Mis.Controllers
             enAction action = (id == 0) ? enAction.Create : enAction.Edit;
             ActionService.SetActionName(action);
             //取得新增或修改的資料結構及資料
-            using var sqlData = new z_sqlInvMasters();
+            using var sqlData = new z_sqlWarehouses();
             using var sqlCode = new z_sqlInvDetails();
             var codeData = sqlCode.GetData(SessionService.BaseNo);
             var model = sqlData.GetData(id);
@@ -218,7 +218,7 @@ namespace mvcadmin10.Areas.Mis.Controllers
         [HttpPost]
         [Login(RoleList = "User")]
         [Security(Mode = enSecurityMode.AddEdit)]
-        public IActionResult CreateEditMaster(InvMasters model)
+        public IActionResult CreateEditMaster(Warehouses model)
         {
             //檢查是否有違反 Metadata 中的 Validation 驗證
             if (!ModelState.IsValid) return View(model);
@@ -227,9 +227,9 @@ namespace mvcadmin10.Areas.Mis.Controllers
             if (model.Id == 0)
             {
                 str_base_no = Guid.NewGuid().ToString();
-                model.BaseNo = str_base_no;
+                model.WarehouseNo = str_base_no;
             }
-            using var sqlData = new z_sqlInvMasters();
+            using var sqlData = new z_sqlWarehouses();
             sqlData.CreateEdit(model, model.Id);
             //設定目前的記錄位置
             if (!string.IsNullOrEmpty(str_base_no)) sqlData.SetBaseNo(str_base_no);
@@ -260,11 +260,11 @@ namespace mvcadmin10.Areas.Mis.Controllers
         [Security(Mode = enSecurityMode.Delete)]
         public override int DeletDataMaster(int id = 0)
         {
-            using var sqlMaster = new z_sqlInvMasters();
+            using var sqlMaster = new z_sqlWarehouses();
             using var sqlDetail = new z_sqlInvDetails();
             //先刪除明細資料
             var model = sqlMaster.GetData(id);
-            sqlDetail.DeleteMasterData(model.ProductNo);
+            sqlDetail.DeleteMasterData(model.WarehouseNo);
             //再刪除主檔資料
             int int_row = sqlMaster.Delete(id);
             SessionService.PageCountMaster -= 1;

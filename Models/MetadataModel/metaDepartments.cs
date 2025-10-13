@@ -14,10 +14,10 @@ public class z_metaDepartments
 {
     [Key]
     public int Id { get; set; }
-    [Display(Name = "代號")]
+    [Display(Name = "部門代號")]
     [Required(ErrorMessage = "{0}不可空白!!")]
     public string? DeptNo { get; set; }
-    [Display(Name = "名稱")]
+    [Display(Name = "部門名稱")]
     [Required(ErrorMessage = "{0}不可空白!!")]
     public string? DeptName { get; set; }
     [Display(Name = "備註")]

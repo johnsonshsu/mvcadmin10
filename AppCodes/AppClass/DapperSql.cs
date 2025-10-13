@@ -84,7 +84,9 @@ public class DapperSql<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     {
         string str_orderby = GetSQLOrderBy();
         string str_rowno = $"SELECT ROW_NUMBER() OVER({str_orderby}) AS RowNo, ";
-        string str_query = sqlQuery.Replace("SELECT ", str_rowno);
+        sqlQuery = sqlQuery.Trim();
+        string str_query = sqlQuery.Substring(6, sqlQuery.Length - 6);
+        str_query = str_rowno + " " + str_query;
         return str_query;
     }
     /// <summary>

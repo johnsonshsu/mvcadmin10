@@ -145,17 +145,19 @@
             </div>
         </div>
         <div class="row form-group">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         @Html.LabelRequiredFor(model => model.ControllerName)
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                         @Html.EditorFor(model => model.ControllerName, new { htmlAttributes = new { @class = "form-control"} })
                         @Html.ValidationMessageFor(model => model.ControllerName, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row form-group">
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-4">
@@ -167,9 +169,6 @@
                     </div>
                 </div>
             </div>
-            
-        </div>
-        <div class="row form-group">
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-4">
@@ -181,12 +180,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         @Html.LabelRequiredFor(model => model.Remark)
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                         @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
                     </div>

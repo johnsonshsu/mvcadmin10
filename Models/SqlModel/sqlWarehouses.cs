@@ -19,5 +19,36 @@ namespace mvcadmin10.Models
             if (string.IsNullOrEmpty(OrderByColumn)) OrderByColumn = DefaultOrderByColumn;
             if (string.IsNullOrEmpty(OrderByDirection)) OrderByDirection = DefaultOrderByDirection;
         }
+        public override string GetSQLSelect()
+        {
+            string str_query = @"
+SELECT Id, WarehouseNo, WarehouseName,Remark ,
+(SELECT SUM(InvDetails.Qty) FROM InvDetails WHERE WarehouseNo = Warehouses.WarehouseNo) AS Qty 
+FROM Warehouses 
+";
+            return AddRowNoColumn(str_query);
+        }
+
+        /// <summary>
+        /// 取得目前主檔資料
+        /// </summary>
+        /// <returns></returns>
+        public Warehouses GetMasterData()
+        {
+            var model = GetAllData().Where(x => x.RowNo == SessionService.PageMaster).FirstOrDefault();
+            return model;
+        }
+
+        /// <summary>
+        /// 以 BaseNo 設定目前的記錄值
+        /// </summary>
+        /// <param name="baseno"></param>
+        public override void SetBaseNo(string baseno)
+        {
+            var models = GetAllData();
+            var model = models.Where(x => x.WarehouseNo == baseno).FirstOrDefault();
+            SessionService.PageMaster = model.RowNo;
+            SetMasterPage();
+        }
     }
 }

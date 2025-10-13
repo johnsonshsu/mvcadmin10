@@ -50,6 +50,16 @@ LEFT OUTER JOIN Warehouses ON InvDetails.WareHouseNo = Warehouses.WarehouseNo
             return dpr.Execute(str_sql, parm);
         }
 
+        public List<InvDetails> GetWarehouseDataList(string WarehouseNo)
+        {
+            string str_sql = GetSQLSelect();
+            str_sql += "WHERE InvDetails.WareHouseNo = @WareHouseNo ";
+            str_sql += GetSQLOrderBy();
+            var parm = new DynamicParameters();
+            parm.Add("@WareHouseNo", WarehouseNo);
+            return dpr.ReadAll<InvDetails>(str_sql, parm);
+        }
+
         /// <summary>
         /// 取得指定商品編號截止日期前 12 月的庫存異動數量統計
         /// </summary>

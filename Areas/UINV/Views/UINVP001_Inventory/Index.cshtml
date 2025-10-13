@@ -108,3 +108,15 @@
         </div>
     </div>
 </div>
+<div class="table-responsive">
+    @if (SessionService.DetailPageTabIndex == 1)
+    {
+        @await Html.PartialAsync("_PartialUINVP001Detail", Model)
+    }
+    @if (SessionService.DetailPageTabIndex == 2)
+    {
+        @await Html.PartialAsync("_PartialUINVP001Chart")
+    }
+</div>
+<hr />
+@await Html.PartialAsync("_PartialFormDetailPageTab", DetailPageTabList)

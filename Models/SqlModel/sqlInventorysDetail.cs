@@ -24,8 +24,9 @@ namespace mvcadmin10.Models
         {
             string str_query = @"
 SELECT InventorysDetail.Id, InventorysDetail.ParentNo, InventorysDetail.ProductNo, 
-Products.ProdName, InventorysDetail.Qty
+Products.ProdName,  Inventorys.WarehouseNo, InventorysDetail.Qty
 FROM InventorysDetail 
+INNER JOIN Inventorys ON InventorysDetail.ParentNo = Inventorys.BaseNo 
 LEFT OUTER JOIN Products ON InventorysDetail.ProductNo = Products.ProdNo 
 ";
             return str_query;
