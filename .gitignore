@@ -16,6 +16,9 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# 忽略巢狀的 Git 儲存庫
+*/.git/
+
 # Mono auto generated files
 mono_crash.*
 
