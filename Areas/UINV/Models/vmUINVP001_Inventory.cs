@@ -24,8 +24,10 @@ namespace mvcadmin10.Models
             using var sqlInventorys = new z_sqlInventorys();
             using var sqlInventorysDetail = new z_sqlInventorysDetail();
             InventoryModel = sqlInventorys.GetMasterData();
+            if (InventoryModel == null) InventoryModel = new Inventorys();
             string baseNo = (InventoryModel == null) ? "" : InventoryModel.BaseNo;
             InventorysDetailModel = sqlInventorysDetail.GetDataList(baseNo);
+            if (InventorysDetailModel == null) InventorysDetailModel = new List<InventorysDetail>();
         }
     }
 }

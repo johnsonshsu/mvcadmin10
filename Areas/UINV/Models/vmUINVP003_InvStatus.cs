@@ -21,8 +21,10 @@ namespace mvcadmin10.Models
             using var sqlMaster = new z_sqlInvMasters();
             using var sqlDetail = new z_sqlInvDetails();
             InvMastersModel = sqlMaster.GetMasterData();
+            if (InvMastersModel == null) InvMastersModel = new InvMasters();
             string baseNo = (InvMastersModel == null) ? "" : InvMastersModel.ProductNo;
             InvDetailsModel = sqlDetail.GetDataList(baseNo);
+            if (InvDetailsModel == null) InvDetailsModel = new List<InvDetails>();
         }
     }
 }

@@ -1,4 +1,3 @@
-﻿@using DocumentFormat.OpenXml.Office.CustomUI
 @model mvcadmin10.Models.vmUINVP001_Inventory
 
 @{
@@ -7,15 +6,15 @@
     var DetailPageTabList = new List<dmDetailTabsModel>();
     DetailPageTabList.Add(new dmDetailTabsModel { TabIndex = 1, TabName = "明細資料" });
     DetailPageTabList.Add(new dmDetailTabsModel { TabIndex = 2, TabName = "統計圖表" });
-    string textColor = "text-dark";
+    string textColor = "text-dark fw-bold";
     if (Model.InventoryModel.IsCancel)
         textColor = "text-danger fw-bold";
     else if (Model.InventoryModel.IsConfirm)
         textColor = "text-success fw-bold";
     else
         textColor = "text-dark fw-bold";
-}
 
+}
 <div class="row mb-0">
     <div class="col-md-12">
         <div class="float-start me-1">@await Html.PartialAsync("_PartialFormMasterNavigator")</div>
@@ -109,15 +108,3 @@
         </div>
     </div>
 </div>
-<div class="table-responsive">
-    @if (SessionService.DetailPageTabIndex == 1)
-    {
-        @await Html.PartialAsync("_PartialUINVP001Detail", Model)
-    }
-    @if (SessionService.DetailPageTabIndex == 2)
-    {
-        @await Html.PartialAsync("_PartialUINVP001Chart")
-    }
-</div>
-<hr />
-@await Html.PartialAsync("_PartialFormDetailPageTab", DetailPageTabList)

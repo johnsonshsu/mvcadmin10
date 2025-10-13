@@ -65,6 +65,10 @@ namespace mvcadmin10.Areas.Mis.Controllers
             SetIndexErrorMessage();
             //設定 ViewBag 及 TempData物件
             SetIndexViewBag();
+            //設定表單狀態
+            SessionService.IsConfirm = false;
+            SessionService.IsCancel = false;
+            SessionService.IsFormLocked = false;
             return View(model);
         }
 

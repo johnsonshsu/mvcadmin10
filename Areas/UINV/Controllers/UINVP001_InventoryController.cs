@@ -74,8 +74,10 @@ namespace mvcadmin10.Areas.Mis.Controllers
             //設定 ViewBag 及 TempData物件
             SetIndexViewBag();
             //設定表單狀態
-            if (model != null && model.InventoryModel != null && model.InventoryModel.Id > 0)
-                SetFormStatus(model.InventoryModel.IsConfirm, model.InventoryModel.IsCancel, model.InventoryModel.SheetDate);
+            SessionService.IsConfirm = false;
+            SessionService.IsCancel = false;
+            SessionService.IsFormLocked = false;
+            SetFormStatus(model.InventoryModel.IsConfirm, model.InventoryModel.IsCancel, model.InventoryModel.SheetDate);
             return View(model);
         }
 
