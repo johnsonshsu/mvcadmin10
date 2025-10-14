@@ -14,7 +14,7 @@ namespace mvcadmin10.Models
         /// <summary>
         /// UINVP002 - 進貨入庫單明細檔
         /// </summary>
-        public List<InvDetails> DetailModel { get; set; } = new List<InvDetails>();
+        public IPagedList<InvDetails> DetailModel { get; set; } = new StaticPagedList<InvDetails>(Enumerable.Empty<InvDetails>(), 1, 10, 0);
 
         public vmUINVP004_WarehouseStatus()
         {
@@ -23,8 +23,11 @@ namespace mvcadmin10.Models
             MasterModel = sqlMaster.GetMasterData();
             if (MasterModel == null) MasterModel = new Warehouses();
             string baseNo = (MasterModel == null) ? "" : MasterModel.WarehouseNo;
-            DetailModel = sqlDetail.GetWarehouseDataList(baseNo);
-            if (DetailModel == null) DetailModel = new List<InvDetails>();
+            var model = sqlDetail.GetWarehouseDataList(baseNo);
+            if (model == null)
+                DetailModel ??= new StaticPagedList<InvDetails>(Enumerable.Empty<InvDetails>(), 1, 10, 0);
+            else
+                DetailModel = model.ToPagedList(SessionService.PageDetail, SessionService.PageDetailSize);
         }
     }
 }

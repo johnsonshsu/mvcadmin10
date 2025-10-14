@@ -36,6 +36,7 @@ namespace mvcadmin10.Areas.Mis.Controllers
             SessionService.IsFormMode = false; //非表單模式
             SessionService.IsConfirmMode = false; //非確認模式
             SessionService.IsMultiForm = true; //表頭明細模式
+            SessionService.PageDetail = 1; //明細頁數
             //這裏可以寫入初始程式
             ActionService.ActionInit();
             //返回資料列表
@@ -63,6 +64,8 @@ namespace mvcadmin10.Areas.Mis.Controllers
             using var model = new vmUINVP004_WarehouseStatus();
             //設定錯誤訊息文字
             SetIndexErrorMessage();
+            //儲存目前頁面資訊
+            SessionService.SetPageDetailInfo(SessionService.PageDetail, SessionService.PageDetailSize, model.DetailModel.TotalItemCount);
             //設定 ViewBag 及 TempData物件
             SetIndexViewBag();
             //設定表單狀態

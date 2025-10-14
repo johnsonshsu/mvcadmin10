@@ -239,14 +239,6 @@
                 </div>
                 <div class="card-body m-1">
                     @RenderBody()
-                    @if (SessionService.IsMultiForm)
-                    {
-                        <div class="row mx-1">
-                            <div class="col-md-12">
-                                @await Html.PartialAsync("_PartialFormPageDetail")
-                            </div>
-                        </div>
-                    }
                 </div>
             </div>
         </main><!-- End #main -->

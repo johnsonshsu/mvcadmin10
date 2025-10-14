@@ -1,6 +1,8 @@
 ﻿@using X.PagedList.Mvc.Core;
 @using X.PagedList;
-@{
+
+@if (((IPagedList)(Model.DetailModel)).PageCount > 0)
+{
     int int_page_detail = SessionService.PageDetail;
     if (SessionService.PageDetail > 0)
     {
