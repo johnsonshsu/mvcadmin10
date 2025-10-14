@@ -2,18 +2,21 @@
 @using X.PagedList;
 
 @{
-    var pageModel = (SessionService.IsMultiForm) ? (IPagedList)(Model.MasterModel) : (IPagedList)Model;
+    var pageModel = (SessionService.IsMultiMode) ? (IPagedList)(Model.MasterModel) : (IPagedList)Model;
 }
 
-<div class="float-start page-info me-2">頁數:</div>
-<div class="float-start me-2">
-    @Html.PagedListPager(pageModel, x => Url.Action(ActionService.Index,
-    ActionService.Controller, new
-    {
-        area = ActionService.Area,
-        pageMaster = x
-    }))
+@if (pageModel.PageCount > 0)
+{
+    <div class="float-start page-info me-2">頁數:</div>
+    <div class="float-start me-2">
+        @Html.PagedListPager(pageModel, x => Url.Action(ActionService.MasterPage,
+        ActionService.Controller, new
+        {
+            area = ActionService.Area,
+            id = x
+        }))
 </div>
 <div class="float-start page-info">
     @ViewBag.PageMasterInfo
 </div>
+}

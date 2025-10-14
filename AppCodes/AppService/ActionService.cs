@@ -302,6 +302,11 @@ public static class ActionService
     public static string DetailPage { get { return "DetailPage"; } }
 
     /// <summary>
+    /// MasterPage Action 名稱
+    /// </summary>
+    public static string MasterPage { get { return "MasterPage"; } }
+
+    /// <summary>
     /// ActionConfirm 名稱
     /// </summary>
     public static string ActionConfirm { get { return "ActionConfirm"; } }

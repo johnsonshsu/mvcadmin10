@@ -24,6 +24,12 @@
                     @Html.DisplayNameSortFor(model => model.DeptName)
                 </th>
                 <th>
+                    @Html.DisplayNameSortFor(model => model.BossNo)
+                </th>
+                <th>
+                    @Html.DisplayNameSortFor(model => model.BossName)
+                </th>
+                <th>
                     @Html.DisplayNameSortFor(model => model.Remark)
                 </th>
             </tr>
@@ -46,6 +52,12 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DeptName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BossNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BossName)
                     </td>
                     <td class="table-wrap">
                         @Html.DisplayFor(modelItem => item.Remark)

@@ -33,9 +33,10 @@ namespace mvcadmin10.Areas.Mis.Controllers
             //設定程式編號及名稱
             SessionService.BaseNo = id;
             SessionService.IsReadonlyMode = false; //非唯讀模式
-            SessionService.IsFormMode = true; //表單模式
+            SessionService.IsLockMode = true; //表單模式
             SessionService.IsConfirmMode = true; //確認模式
-            SessionService.IsMultiForm = true; //表頭明細模式
+            SessionService.IsCancelMode = true; //非作廢/結束模式
+            SessionService.IsMultiMode = true; //表頭明細模式
             //這裏可以寫入初始程式
             ActionService.ActionInit();
             //設定程式編號及名稱

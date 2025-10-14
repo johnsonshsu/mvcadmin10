@@ -562,6 +562,7 @@ public partial class dbEntities : DbContext
 
             entity.Property(e => e.DeptName).HasMaxLength(50);
             entity.Property(e => e.DeptNo).HasMaxLength(50);
+            entity.Property(e => e.BossNo).HasMaxLength(50);
             entity.Property(e => e.Remark).HasMaxLength(250);
         });
 

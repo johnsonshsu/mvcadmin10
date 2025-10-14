@@ -40,35 +40,6 @@ CREATE TABLE [dbo].[Companys]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[Users]
-(
-    [Id] [int] IDENTITY(1,1) NOT NULL,
-    [IsValid] [bit] NOT NULL,
-    [UserNo] [nvarchar](50) NULL,
-    [UserName] [nvarchar](50) NULL,
-    [Password] [nvarchar](250) NULL,
-    [EmpNo] [nvarchar](50) NULL,
-    [CodeNo] [nvarchar](50) NULL,
-    [RoleNo] [nvarchar](50) NULL,
-    [GenderCode] [nvarchar](50) NULL,
-    [DeptNo] [nvarchar](50) NULL,
-    [TitleNo] [nvarchar](50) NULL,
-    [Birthday] [date] NULL,
-    [OnboardDate] [date] NULL,
-    [LeaveDate] [date] NULL,
-    [ContactEmail] [nvarchar](50) NULL,
-    [ContactTel] [nvarchar](50) NULL,
-    [ContactAddress] [nvarchar](250) NULL,
-    [ValidateCode] [nvarchar](250) NULL,
-    [NotifyPassword] [nvarchar](250) NULL,
-    [Remark] [nvarchar](250) NULL,
-    CONSTRAINT [PK_Users] PRIMARY KEY NONCLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
 CREATE TABLE [dbo].[CodeDatas]
 (
     [Id] [int] IDENTITY(1,1) NOT NULL,
@@ -397,6 +368,7 @@ CREATE TABLE [dbo].[Departments]
     [Id] [int] IDENTITY(1,1) NOT NULL,
     [DeptNo] [nvarchar](50) NULL,
     [DeptName] [nvarchar](50) NULL,
+    [BossNo] [nvarchar](50) NULL,
     [Remark] [nvarchar](250) NULL,
     CONSTRAINT [PK_Departments] PRIMARY KEY NONCLUSTERED 
 (
@@ -1340,6 +1312,35 @@ CREATE TABLE [dbo].[TodoLists]
     [DeadlineDate] [datetime] NOT NULL,
     [Remark] [nvarchar](500) NULL,
     CONSTRAINT [PK_TodoLists] PRIMARY KEY NONCLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[Users]
+(
+    [Id] [int] IDENTITY(1,1) NOT NULL,
+    [IsValid] [bit] NOT NULL,
+    [UserNo] [nvarchar](50) NULL,
+    [UserName] [nvarchar](50) NULL,
+    [Password] [nvarchar](250) NULL,
+    [EmpNo] [nvarchar](50) NULL,
+    [CodeNo] [nvarchar](50) NULL,
+    [RoleNo] [nvarchar](50) NULL,
+    [GenderCode] [nvarchar](50) NULL,
+    [DeptNo] [nvarchar](50) NULL,
+    [TitleNo] [nvarchar](50) NULL,
+    [Birthday] [date] NULL,
+    [OnboardDate] [date] NULL,
+    [LeaveDate] [date] NULL,
+    [ContactEmail] [nvarchar](50) NULL,
+    [ContactTel] [nvarchar](50) NULL,
+    [ContactAddress] [nvarchar](250) NULL,
+    [ValidateCode] [nvarchar](250) NULL,
+    [NotifyPassword] [nvarchar](250) NULL,
+    [Remark] [nvarchar](250) NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]

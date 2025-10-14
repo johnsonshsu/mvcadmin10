@@ -711,19 +711,19 @@ public static class SessionService
         set { SetSessionValue<int>("PageSizeDetail", value); }
     }
     /// <summary>
-    /// 是否為表單模式
+    /// 是否為鎖定模式
     /// </summary>
     /// <value></value>
-    public static bool IsFormMode
+    public static bool IsLockMode
     {
         get
         {
             bool bln_value = false;
-            string str_value = GetSessionValue<bool>("IsFormMode", bln_value).ToString();
+            string str_value = GetSessionValue<bool>("IsLockMode", bln_value).ToString();
             if (!bool.TryParse(str_value, out bln_value)) bln_value = false;
             return bln_value;
         }
-        set { SetSessionValue<bool>("IsFormMode", value); }
+        set { SetSessionValue<bool>("IsLockMode", value); }
     }
     /// <summary>
     /// 是否為為確認模式
@@ -739,6 +739,21 @@ public static class SessionService
             return bln_value;
         }
         set { SetSessionValue<bool>("IsConfirmMode", value); }
+    }
+    /// <summary>
+    /// 是否為為作廢模式
+    /// </summary>
+    /// <value></value>
+    public static bool IsCancelMode
+    {
+        get
+        {
+            bool bln_value = false;
+            string str_value = GetSessionValue<bool>("IsCancelMode", bln_value).ToString();
+            if (!bool.TryParse(str_value, out bln_value)) bln_value = false;
+            return bln_value;
+        }
+        set { SetSessionValue<bool>("IsCancelMode", value); }
     }
     /// <summary>
     /// 是否為唯讀模式
@@ -771,19 +786,49 @@ public static class SessionService
         set { SetSessionValue<bool>("IsFormLocked", value); }
     }
     /// <summary>
-    /// 是否為表頭明細式表單
+    /// 是否為鎖定表單模式
     /// </summary>
     /// <value></value>
-    public static bool IsMultiForm
+    public static bool IsFormConfirmMode
     {
         get
         {
             bool bln_value = false;
-            string str_value = GetSessionValue<bool>("IsMultiForm", bln_value).ToString();
+            string str_value = GetSessionValue<bool>("IsFormConfirmMode", bln_value).ToString();
             if (!bool.TryParse(str_value, out bln_value)) bln_value = false;
             return bln_value;
         }
-        set { SetSessionValue<bool>("IsMultiForm", value); }
+        set { SetSessionValue<bool>("IsFormConfirmMode", value); }
+    }
+    /// <summary>
+    /// 是否為鎖定表單模式
+    /// </summary>
+    /// <value></value>
+    public static bool IsFormCloseMode
+    {
+        get
+        {
+            bool bln_value = false;
+            string str_value = GetSessionValue<bool>("IsFormCloseMode", bln_value).ToString();
+            if (!bool.TryParse(str_value, out bln_value)) bln_value = false;
+            return bln_value;
+        }
+        set { SetSessionValue<bool>("IsFormCloseMode", value); }
+    }
+    /// <summary>
+    /// 是否為表頭明細式表單
+    /// </summary>
+    /// <value></value>
+    public static bool IsMultiMode
+    {
+        get
+        {
+            bool bln_value = false;
+            string str_value = GetSessionValue<bool>("IsMultiMode", bln_value).ToString();
+            if (!bool.TryParse(str_value, out bln_value)) bln_value = false;
+            return bln_value;
+        }
+        set { SetSessionValue<bool>("IsMultiMode", value); }
     }
     /// <summary>
     ///表頭表單是否確認

@@ -6,7 +6,7 @@
 {
     <div class="float-start page-info me-2">頁數:</div>
     <div class="float-start me-2">
-        @if (SessionService.IsMultiForm)
+        @if (SessionService.IsMultiMode)
         {
             @Html.PagedListPager((IPagedList)Model, x => Url.Action(ActionService.List,
             ActionService.Controller, new
@@ -17,7 +17,7 @@
         }
         else
         {
-            @Html.PagedListPager((IPagedList)Model, x => Url.Action(ActionService.Index,
+            @Html.PagedListPager((IPagedList)Model, x => Url.Action(ActionService.MasterPage,
             ActionService.Controller, new
             {
                 area = ActionService.Area,

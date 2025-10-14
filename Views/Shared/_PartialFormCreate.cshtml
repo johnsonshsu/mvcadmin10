@@ -9,8 +9,12 @@
         { bln_valid = true; }
         else
         {
-            if (bln_valid && SessionService.IsFormMode)
-            { if (SessionService.IsFormLocked || SessionService.IsConfirm || SessionService.IsCancel) bln_valid = false; }
+            if (bln_valid)
+            {
+                if (SessionService.IsFormLocked || (SessionService.IsConfirmMode && SessionService.IsConfirm) ||
+                (SessionService.IsCancelMode && SessionService.IsCancel)) bln_valid =
+                false;
+            }
         }
     }
 }

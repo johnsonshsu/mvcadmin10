@@ -6,7 +6,9 @@ namespace mvcadmin10.Models
     [ModelMetadataType(typeof(z_metaDepartments))]
     public partial class Departments
     {
-
+        [NotMapped]
+        [Display(Name = "部門主管")]
+        public string? BossName { get; set; }
     }
 }
 
@@ -20,6 +22,9 @@ public class z_metaDepartments
     [Display(Name = "部門名稱")]
     [Required(ErrorMessage = "{0}不可空白!!")]
     public string? DeptName { get; set; }
+    [Display(Name = "主管代號")]
+    [Required(ErrorMessage = "{0}不可空白!!")]
+    public string? BossNo { get; set; }
     [Display(Name = "備註")]
     public string? Remark { get; set; }
 }

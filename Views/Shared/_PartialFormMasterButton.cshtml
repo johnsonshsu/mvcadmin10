@@ -35,31 +35,37 @@ str_class = "btn btn-danger";
     <input type="button" id="@ActionService.DeleteMaster" value="@SessionService.GetActionName(enAction.Delete)"
         class="@str_class" onclick="DeleteMasterData(@SessionService.MasterId , '@SessionService.MasterNo' )" />
 
-    str_class = "btn btn-success";
-    if (bln_hasrows && !bln_cancel && !bln_locked && !bln_confirm && ((formSecurity.IsConfirm) ||
-    AppService.DebugMode))
-    { str_class += ""; }
-    else
-    { str_class += " disabled"; }
-    <input type="button" id="@ActionService.Confirm" value="@SessionService.GetActionName(enAction.Confirm)"
-        class="@str_class"
-        onclick="ConfirmAction(@SessionService.MasterId , '@SessionService.MasterNo' , 'Confirm' , '設定為已確認狀態' )" />
+    if (SessionService.IsConfirmMode)
+    {
+        str_class = "btn btn-success";
+        if (bln_hasrows && !bln_cancel && !bln_locked && !bln_confirm && ((formSecurity.IsConfirm) ||
+        AppService.DebugMode))
+        { str_class += ""; }
+        else
+        { str_class += " disabled"; }
+        <input type="button" id="@ActionService.Confirm" value="@SessionService.GetActionName(enAction.Confirm)"
+            class="@str_class"
+            onclick="ConfirmAction(@SessionService.MasterId , '@SessionService.MasterNo' , 'Confirm' , '設定為已確認狀態' )" />
 
-    str_class = "btn btn-danger";
-    if (bln_hasrows && !bln_cancel && !bln_locked && bln_confirm && (formSecurity.IsUndo ||
-    AppService.DebugMode))
-    { str_class += ""; }
-    else
-    { str_class += " disabled"; }
-    <input type="button" id="@ActionService.Undo" value="@SessionService.GetActionName(enAction.Undo)" class="@str_class"
-        onclick="ConfirmAction(@SessionService.MasterId , '@SessionService.MasterNo' , 'Undo' , '解除確認狀態' )" />
+        str_class = "btn btn-danger";
+        if (bln_hasrows && !bln_cancel && !bln_locked && bln_confirm && (formSecurity.IsUndo ||
+        AppService.DebugMode))
+        { str_class += ""; }
+        else
+        { str_class += " disabled"; }
+        <input type="button" id="@ActionService.Undo" value="@SessionService.GetActionName(enAction.Undo)" class="@str_class"
+            onclick="ConfirmAction(@SessionService.MasterId , '@SessionService.MasterNo' , 'Undo' , '解除確認狀態' )" />
+    }
 
-    str_class = "btn btn-warning";
-    if (bln_hasrows && !bln_cancel && !bln_locked && (formSecurity.IsCancel || AppService.DebugMode))
-    { str_class += ""; }
-    else
-    { str_class += " disabled"; }
-    <input type="button" id="@ActionService.Cancel" value="@SessionService.GetActionName(enAction.Cancel)"
-        class="@str_class"
-        onclick="ConfirmAction(@SessionService.MasterId , '@SessionService.MasterNo' , 'Cancel' , '設定為已作廢狀態' )" />
+    if (SessionService.IsCancelMode)
+    {
+        str_class = "btn btn-warning";
+        if (bln_hasrows && !bln_cancel && !bln_locked && (formSecurity.IsCancel || AppService.DebugMode))
+        { str_class += ""; }
+        else
+        { str_class += " disabled"; }
+        <input type="button" id="@ActionService.Cancel" value="@SessionService.GetActionName(enAction.Cancel)"
+            class="@str_class"
+            onclick="ConfirmAction(@SessionService.MasterId , '@SessionService.MasterNo' , 'Cancel' , '設定為已作廢狀態' )" />
+    }
 }

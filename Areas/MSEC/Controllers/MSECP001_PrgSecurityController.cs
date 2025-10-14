@@ -33,9 +33,10 @@ namespace mvcadmin10.Areas.Mis.Controllers
             //設定程式編號及名稱
             SessionService.BaseNo = id;
             SessionService.IsReadonlyMode = false; //非唯讀模式
-            SessionService.IsFormMode = false; //非表單模式
+            SessionService.IsLockMode = false; //非表單模式
             SessionService.IsConfirmMode = false; //非確認模式
-            SessionService.IsMultiForm = false; //非表頭明細模式
+            SessionService.IsCancelMode = false; //非作廢/結束模式
+            SessionService.IsMultiMode = false; //非表頭明細模式
             //未設定主檔編號則取第一筆
             if (string.IsNullOrEmpty(SessionService.BaseNo))
             {
@@ -45,7 +46,8 @@ namespace mvcadmin10.Areas.Mis.Controllers
             //這裏可以寫入初始程式
             ActionService.ActionInit();
             //返回資料列表
-            return RedirectToAction(ActionService.Index, ActionService.Controller, new { area = ActionService.Area, id = initPage });
+            SessionService.PageMaster = initPage;
+            return RedirectToAction(ActionService.Index, ActionService.Controller, new { area = ActionService.Area });
         }
 
         /// <summary>
@@ -66,10 +68,10 @@ namespace mvcadmin10.Areas.Mis.Controllers
             using var sqlData = new z_sqlSecuritys();
             var modelData = sqlData.GetPrgDataList(SessionService.BaseNo, SessionService.SearchText);
             int pageSize = (SessionService.IsPageSize) ? SessionService.PageDetailSize : modelData.Count();
-            var model = modelData.ToPagedList(id, pageSize);
+            var model = modelData.ToPagedList(SessionService.PageMaster, pageSize);
             if (!string.IsNullOrEmpty(sqlData.ErrorMessage)) SessionService.ErrorMessage = sqlData.ErrorMessage;
             //儲存目前頁面資訊
-            SessionService.SetPageInfo(id, SessionService.PageDetailSize, model.TotalItemCount);
+            SessionService.SetPageInfo(SessionService.PageMaster, SessionService.PageDetailSize, model.TotalItemCount);
             //設定錯誤訊息文字
             SetIndexErrorMessage();
             //設定 ViewBag 及 TempData物件

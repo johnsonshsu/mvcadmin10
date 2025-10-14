@@ -99,11 +99,12 @@ public static class SecurityService
         SessionService.LockNo = model.LockNo;
         SessionService.IsPageSize = model.IsPageSize;
         SessionService.IsSearch = model.IsSearch;
-        SessionService.IsFormMode = false;
+        SessionService.IsLockMode = false;
         SessionService.IsFormLocked = false;
         SessionService.IsConfirmMode = false;
+        SessionService.IsCancelMode = false;
         SessionService.IsReadonlyMode = false;
-        SessionService.IsMultiForm = false;
+        SessionService.IsMultiMode = false;
         SessionService.PageMaster = -1;
         SessionService.PageMasterSize = 1;
         SessionService.PageDetailSize = 10;

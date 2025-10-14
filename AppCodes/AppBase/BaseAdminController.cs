@@ -205,7 +205,7 @@ public class BaseAdminController : Controller
         SessionService.IsConfirm = isConfirm;
         SessionService.IsCancel = isCancel;
         if (formDate == null) formDate = DateTime.MaxValue;
-        if (SessionService.IsFormMode)
+        if (SessionService.IsLockMode)
             SessionService.IsFormLocked = (SessionService.LockDate >= formDate);
     }
 
@@ -257,7 +257,7 @@ public class BaseAdminController : Controller
             return RedirectToAction(ActionService.ErrorMessage, ActionService.Controller, new { area = ActionService.Area, id = "Unauthorized" });
         object obj_text = Request.Form[ActionService.SearchText];
         SessionService.SearchText = (obj_text == null) ? string.Empty : obj_text.ToString();
-        if (SessionService.IsMultiForm)
+        if (SessionService.IsMultiMode)
             return RedirectToAction(ActionService.List, ActionService.Controller, new { area = ActionService.Area });
         return RedirectToAction(ActionService.Index, ActionService.Controller, new { area = ActionService.Area });
     }
@@ -277,7 +277,7 @@ public class BaseAdminController : Controller
         //設定動作名稱
         ActionService.SetActionName();
         ActionService.SetActionSort(id);
-        if (SessionService.IsMultiForm)
+        if (SessionService.IsMultiMode)
             return RedirectToAction(ActionService.List, ActionService.Controller, new { area = ActionService.Area });
         return RedirectToAction(ActionService.Index, ActionService.Controller, new { area = ActionService.Area });
     }
@@ -309,6 +309,19 @@ public class BaseAdminController : Controller
         object obj_text = Request.Form["BaseNo"];
         id = (obj_text == null) ? string.Empty : obj_text.ToString();
         SessionService.BaseNo = id;
+        return RedirectToAction(ActionService.Index, ActionService.Controller, new { area = ActionService.Area });
+    }
+    /// <summary>
+    /// 設定表頭頁數
+    /// </summary>
+    /// <param name="id">頁數</param>
+    /// <returns></returns>
+    [Login()]
+    [HttpGet]
+    [Security(Mode = enSecurityMode.Display)]
+    public virtual IActionResult MasterPage(int id = 1)
+    {
+        SessionService.PageMaster = id;
         return RedirectToAction(ActionService.Index, ActionService.Controller, new { area = ActionService.Area });
     }
 
