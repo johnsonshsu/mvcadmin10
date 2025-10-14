@@ -10,21 +10,21 @@ namespace mvcadmin10.Models
         /// <summary>
         /// UINVP002 - 進貨入庫單表頭檔
         /// </summary>
-        public InvMasters InvMastersModel { get; set; } = new InvMasters();
+        public InvMasters MasterModel { get; set; } = new InvMasters();
         /// <summary>
         /// UINVP002 - 進貨入庫單明細檔
         /// </summary>
-        public List<InvDetails> InvDetailsModel { get; set; } = new List<InvDetails>();
+        public List<InvDetails> DetailModel { get; set; } = new List<InvDetails>();
 
         public vmUINVP003_InvStatus()
         {
             using var sqlMaster = new z_sqlInvMasters();
             using var sqlDetail = new z_sqlInvDetails();
-            InvMastersModel = sqlMaster.GetMasterData();
-            if (InvMastersModel == null) InvMastersModel = new InvMasters();
-            string baseNo = (InvMastersModel == null) ? "" : InvMastersModel.ProductNo;
-            InvDetailsModel = sqlDetail.GetDataList(baseNo);
-            if (InvDetailsModel == null) InvDetailsModel = new List<InvDetails>();
+            MasterModel = sqlMaster.GetMasterData();
+            if (MasterModel == null) MasterModel = new InvMasters();
+            string baseNo = (MasterModel == null) ? "" : MasterModel.ProductNo;
+            DetailModel = sqlDetail.GetDataList(baseNo);
+            if (DetailModel == null) DetailModel = new List<InvDetails>();
         }
     }
 }

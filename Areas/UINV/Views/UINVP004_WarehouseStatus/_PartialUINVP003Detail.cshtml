@@ -13,21 +13,21 @@
                 </th>
             }
             <th class="fixedcolumn">
-                @Html.DisplayNameSortFor(model => model.InvDetailsModel.FirstOrDefault().ProductNo)
+                @Html.DisplayNameSortFor(model => model.DetailModel.FirstOrDefault().ProductNo)
             </th>
             <th>
-                @Html.DisplayNameSortFor(model => model.InvDetailsModel.FirstOrDefault().ProductName)
+                @Html.DisplayNameSortFor(model => model.DetailModel.FirstOrDefault().ProductName)
             </th>
             <th>
-                @Html.DisplayNameSortFor(model => model.InvDetailsModel.FirstOrDefault().Qty)
+                @Html.DisplayNameSortFor(model => model.DetailModel.FirstOrDefault().Qty)
             </th>
             <th>
-                @Html.DisplayNameSortFor(model => model.InvDetailsModel.FirstOrDefault().Remark)
+                @Html.DisplayNameSortFor(model => model.DetailModel.FirstOrDefault().Remark)
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.InvDetailsModel)
+        @foreach (var item in Model.DetailModel)
         {
             SessionService.RowId = item.Id;
             SessionService.RowData = $"{item.ProductNo} {item.ProductName}";

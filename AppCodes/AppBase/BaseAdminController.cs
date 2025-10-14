@@ -312,6 +312,20 @@ public class BaseAdminController : Controller
         return RedirectToAction(ActionService.Index, ActionService.Controller, new { area = ActionService.Area });
     }
 
+    /// <summary>
+    /// 設定明細頁數
+    /// </summary>
+    /// <param name="id">頁數</param>
+    /// <returns></returns>
+    [Login()]
+    [HttpGet]
+    [Security(Mode = enSecurityMode.Display)]
+    public virtual IActionResult DetailPage(int id = 1)
+    {
+        SessionService.PageDetail = id;
+        return RedirectToAction(ActionService.Index, ActionService.Controller, new { area = ActionService.Area });
+    }
+
     #region Navigation 事件
     /// <summary>
     /// 表頭記錄移到第一筆

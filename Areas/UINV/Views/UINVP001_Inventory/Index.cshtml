@@ -7,9 +7,9 @@
     DetailPageTabList.Add(new dmDetailTabsModel { TabIndex = 1, TabName = "明細資料" });
     DetailPageTabList.Add(new dmDetailTabsModel { TabIndex = 2, TabName = "統計圖表" });
     string textColor = "text-dark fw-bold";
-    if (Model.InventoryModel.IsCancel)
+    if (Model.MasterModel.IsCancel)
         textColor = "text-danger fw-bold";
-    else if (Model.InventoryModel.IsConfirm)
+    else if (Model.MasterModel.IsConfirm)
         textColor = "text-success fw-bold";
     else
         textColor = "text-dark fw-bold";
@@ -28,14 +28,14 @@
         <div class="row">
             <div class="col-md-4">
                 <span class="text-dark fw-bold">
-                    @Html.DisplayNameFor(m => m.InventoryModel.SheetNo)：
+                    @Html.DisplayNameFor(m => m.MasterModel.SheetNo)：
                 </span>
                 <span class="@textColor">
-                    @Html.DisplayFor(m => m.InventoryModel.SheetNo)
+                    @Html.DisplayFor(m => m.MasterModel.SheetNo)
                 </span>
                 <a href="javascript:void(0);" class="@textColor" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="@Model.InventoryModel.StatusName">
-                    <i class="@Model.InventoryModel.StatusIcon ms-1"></i>
+                    title="@Model.MasterModel.StatusName">
+                    <i class="@Model.MasterModel.StatusIcon ms-1"></i>
                 </a>
                 @if (SessionService.IsFormLocked)
                 {
@@ -44,65 +44,65 @@
             </div>
             <div class="col-md-4">
                 <span class="text-dark fw-bold">
-                    @Html.DisplayNameFor(m => m.InventoryModel.SheetDate)：
+                    @Html.DisplayNameFor(m => m.MasterModel.SheetDate)：
                 </span>
                 <span class="text-dark">
-                    @Html.DisplayFor(m => m.InventoryModel.SheetDate)
+                    @Html.DisplayFor(m => m.MasterModel.SheetDate)
                 </span>
             </div>
             <div class="col-md-4">
                 <span class="text-dark fw-bold">
-                    @Html.DisplayNameFor(m => m.InventoryModel.StatusName)：
+                    @Html.DisplayNameFor(m => m.MasterModel.StatusName)：
                 </span>
                 <span class="text-dark">
-                    @Html.DisplayFor(m => m.InventoryModel.StatusName)
-                </span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <span class="text-dark fw-bold">
-                    @Html.DisplayNameFor(m => m.InventoryModel.CodeName)：
-                </span>
-                <span class="text-dark">
-                    @Html.DisplayFor(m => m.InventoryModel.CodeName)
-                </span>
-            </div>
-            <div class="col-md-4">
-                <span class="text-dark fw-bold">
-                    @Html.DisplayNameFor(m => m.InventoryModel.WarehouseName)：
-                </span>
-                <span class="text-dark">
-                    @Html.DisplayFor(m => m.InventoryModel.WarehouseNo)
-                    @Html.DisplayFor(m => m.InventoryModel.WarehouseName)
-                </span>
-            </div>
-            <div class="col-md-4">
-                <span class="text-dark fw-bold">
-                    @Html.DisplayNameFor(m => m.InventoryModel.HandleName)：
-                </span>
-                <span class="text-dark">
-                    @Html.DisplayFor(m => m.InventoryModel.HandleNo)
-                    @Html.DisplayFor(m => m.InventoryModel.HandleName)
+                    @Html.DisplayFor(m => m.MasterModel.StatusName)
                 </span>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <span class="text-dark fw-bold">
-                    @Html.DisplayNameFor(m => m.InventoryModel.TargetName)：
+                    @Html.DisplayNameFor(m => m.MasterModel.CodeName)：
                 </span>
                 <span class="text-dark">
-                    @Html.DisplayFor(m => m.InventoryModel.TargetNo)
-                    @Html.DisplayFor(m => m.InventoryModel.TargetName)
+                    @Html.DisplayFor(m => m.MasterModel.CodeName)
+                </span>
+            </div>
+            <div class="col-md-4">
+                <span class="text-dark fw-bold">
+                    @Html.DisplayNameFor(m => m.MasterModel.WarehouseName)：
+                </span>
+                <span class="text-dark">
+                    @Html.DisplayFor(m => m.MasterModel.WarehouseNo)
+                    @Html.DisplayFor(m => m.MasterModel.WarehouseName)
+                </span>
+            </div>
+            <div class="col-md-4">
+                <span class="text-dark fw-bold">
+                    @Html.DisplayNameFor(m => m.MasterModel.HandleName)：
+                </span>
+                <span class="text-dark">
+                    @Html.DisplayFor(m => m.MasterModel.HandleNo)
+                    @Html.DisplayFor(m => m.MasterModel.HandleName)
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <span class="text-dark fw-bold">
+                    @Html.DisplayNameFor(m => m.MasterModel.TargetName)：
+                </span>
+                <span class="text-dark">
+                    @Html.DisplayFor(m => m.MasterModel.TargetNo)
+                    @Html.DisplayFor(m => m.MasterModel.TargetName)
                 </span>
             </div>
             <div class="col-md-8">
                 <span class="text-dark fw-bold">
-                    @Html.DisplayNameFor(m => m.InventoryModel.Remark)：
+                    @Html.DisplayNameFor(m => m.MasterModel.Remark)：
                 </span>
                 <span class="text-dark">
-                    @Html.DisplayFor(m => m.InventoryModel.Remark)
+                    @Html.DisplayFor(m => m.MasterModel.Remark)
                 </span>
             </div>
         </div>

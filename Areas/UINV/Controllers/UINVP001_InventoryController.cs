@@ -65,8 +65,8 @@ namespace mvcadmin10.Areas.Mis.Controllers
             //取得資料列表集合
             using var model = new vmUINVP001_Inventory();
             //取得月份資料(統計圖表使用)
-            if (model != null && model.InventoryModel != null && model.InventoryModel.SheetDate != null)
-                SessionService.StringValue1 = model.InventoryModel.SheetDate?.ToString("yyyy-MM-dd");
+            if (model != null && model.MasterModel != null && model.MasterModel.SheetDate != null)
+                SessionService.StringValue1 = model.MasterModel.SheetDate?.ToString("yyyy-MM-dd");
             else
                 SessionService.StringValue1 = DateTime.Today.ToString("yyyy-MM-dd");
             //設定錯誤訊息文字
@@ -77,7 +77,7 @@ namespace mvcadmin10.Areas.Mis.Controllers
             SessionService.IsConfirm = false;
             SessionService.IsCancel = false;
             SessionService.IsFormLocked = false;
-            SetFormStatus(model.InventoryModel.IsConfirm, model.InventoryModel.IsCancel, model.InventoryModel.SheetDate);
+            SetFormStatus(model.MasterModel.IsConfirm, model.MasterModel.IsCancel, model.MasterModel.SheetDate);
             return View(model);
         }
 

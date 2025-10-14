@@ -10,21 +10,21 @@ namespace mvcadmin10.Models
         /// <summary>
         /// UINVP002 - 進貨入庫單表頭檔
         /// </summary>
-        public Inventorys InventoryModel { get; set; } = new Inventorys();
+        public Inventorys MasterModel { get; set; } = new Inventorys();
         /// <summary>
         /// UINVP002 - 進貨入庫單明細檔
         /// </summary>
-        public List<InventorysDetail> InventorysDetailModel { get; set; } = new List<InventorysDetail>();
+        public List<InventorysDetail> DetailModel { get; set; } = new List<InventorysDetail>();
 
         public vmUINVP001_Inventory()
         {
             using var sqlInventorys = new z_sqlInventorys();
             using var sqlInventorysDetail = new z_sqlInventorysDetail();
-            InventoryModel = sqlInventorys.GetMasterData();
-            if (InventoryModel == null) InventoryModel = new Inventorys();
-            string baseNo = (InventoryModel == null) ? "" : InventoryModel.BaseNo;
-            InventorysDetailModel = sqlInventorysDetail.GetDataList(baseNo);
-            if (InventorysDetailModel == null) InventorysDetailModel = new List<InventorysDetail>();
+            MasterModel = sqlInventorys.GetMasterData();
+            if (MasterModel == null) MasterModel = new Inventorys();
+            string baseNo = (MasterModel == null) ? "" : MasterModel.BaseNo;
+            DetailModel = sqlInventorysDetail.GetDataList(baseNo);
+            if (DetailModel == null) DetailModel = new List<InventorysDetail>();
         }
     }
 }
