@@ -24,7 +24,7 @@ namespace mvcadmin10.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            ActionService.SetPrgInfo("admin", "後台管理系統");
+            ActionService.SetPrgInfo("admin", AppService.AppName);
             ActionService.SetActionName(enAction.Login);
             ActionService.SetSubActionName();
             ActionService.SetActionCardSize(enCardSize.Medium);
