@@ -21,6 +21,9 @@ namespace mvcadmin10.Models
         [NotMapped]
         [Display(Name = "鎖定名稱")]
         public string? LockName { get; set; }
+        [NotMapped]
+        [Display(Name = "流程名稱")]
+        public string? RouteName { get; set; }
     }
 }
 

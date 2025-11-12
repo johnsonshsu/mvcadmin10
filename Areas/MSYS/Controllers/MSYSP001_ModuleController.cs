@@ -95,7 +95,10 @@ namespace mvcadmin10.Areas.Mis.Controllers
             //新增預設值
             if (id == 0)
             {
-
+                model.IsEnabled = true;
+                model.IsWorkflow = false;
+                model.RoleNo = "User";
+                model.IconName = "fas fa-book";
             }
             return View(model);
         }

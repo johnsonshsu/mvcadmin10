@@ -36,6 +36,9 @@ new { id = "baseNoForm", role = "form" }))
                     </th>
                 }
                 <th>
+                    <span class="text-primary">功能</span>
+                </th>
+                <th>
                     @Html.DisplayNameSortFor(model => model.IsEnabled)
                 </th>
                 <th>
@@ -64,6 +67,9 @@ new { id = "baseNoForm", role = "form" }))
                 </th>
                 <th>
                     @Html.DisplayNameSortFor(model => model.LockName)
+                </th>
+                <th>
+                    @Html.DisplayNameSortFor(model => model.RouteName)
                 </th>
                 <th>
                     @Html.DisplayNameSortFor(model => model.AreaName)
@@ -96,6 +102,29 @@ new { id = "baseNoForm", role = "form" }))
                         </td>
                     }
                     <td>
+                        <div class="dropdown" style="position: static;">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="dropdown-menu" style="z-index: 9999;">
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="@Url.Action("Flow", ActionService.Controller, new { area = ActionService.Area, id = item.Id })">
+                                        <table>
+                                            <tr>
+                                                <td class="action-popup">
+                                                    <i class="fa-solid fa-chart-diagram fa-2x me-2"></i>
+                                                </td>
+                                                <td class="fs-6">簽核流程</td>
+                                            </tr>
+                                        </table>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.IsEnabled)
                     </td>
                     <td>
@@ -124,6 +153,9 @@ new { id = "baseNoForm", role = "form" }))
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.LockName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RouteName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.AreaName)

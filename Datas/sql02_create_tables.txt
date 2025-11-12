@@ -1078,6 +1078,7 @@ CREATE TABLE [dbo].[Programs]
     [PrgName] [nvarchar](50) NULL,
     [CodeNo] [nvarchar](50) NULL,
     [LockNo] [nvarchar](50) NULL,
+    [RouteNo] [nvarchar](50) NULL,
     [AreaName] [nvarchar](50) NULL,
     [ControllerName] [nvarchar](50) NULL,
     [ActionName] [nvarchar](50) NULL,
@@ -1403,98 +1404,97 @@ CREATE TABLE [dbo].[Vendors]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-CREATE TABLE [dbo].[WorkflowDetails]
-(
-    [Id] [int] IDENTITY(1,1) NOT NULL,
-    [IsClose] [bit] NOT NULL,
-    [IsApprove] [bit] NOT NULL,
-    [IsReject] [bit] NOT NULL,
-    [MasterGuidNo] [nvarchar](50) NULL,
-    [RouteGuidNo] [nvarchar](50) NULL,
-    [RouteOrder] [nvarchar](50) NULL,
-    [RoleNo] [nvarchar](50) NULL,
-    [RoleName] [nvarchar](50) NULL,
-    [UserNo] [nvarchar](50) NULL,
-    [UserName] [nvarchar](50) NULL,
-    [AgentNo] [nvarchar](50) NULL,
-    [AgentName] [nvarchar](50) NULL,
-    [CreateTime] [datetime] NOT NULL,
-    [UserReadTime] [datetime] NULL,
-    [AgentReadTime] [datetime] NULL,
-    [SignUserNo] [nvarchar](50) NULL,
-    [SignUserName] [nvarchar](50) NULL,
-    [SignTime] [datetime] NULL,
-    [SignComment] [nvarchar](250) NULL,
-    [Remark] [nvarchar](250) NULL,
-    [GuidNo] [nvarchar](50) NULL,
-    CONSTRAINT [PK_WorkflowDetails] PRIMARY KEY NONCLUSTERED 
+CREATE TABLE [dbo].[WorkflowDetails](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[BaseNo] [nvarchar](50) NULL,
+	[ParentNo] [nvarchar](50) NULL,
+	[OrderNo] [nvarchar](50) NULL,
+	[IsCurrent] [bit] NOT NULL,
+	[IsApprove] [bit] NOT NULL,
+	[IsReject] [bit] NOT NULL,
+	[UserNo] [nvarchar](50) NULL,
+	[SignNo] [nvarchar](50) NULL,
+	[CreateTime] [datetime] NULL,
+	[StartTime] [datetime] NULL,
+	[ActionTime] [datetime] NULL,
+	[CommentText] [nvarchar](250) NULL,
+	[Remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_WorkflowDetails] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
 
-CREATE TABLE [dbo].[WorkflowMasters]
-(
-    [Id] [int] IDENTITY(1,1) NOT NULL,
-    [IsClose] [bit] NOT NULL,
-    [IsApprove] [bit] NOT NULL,
-    [IsReject] [bit] NOT NULL,
-    [FlowGuidNo] [nvarchar](50) NULL,
-    [SheetNo] [nvarchar](50) NULL,
-    [SheetName] [nvarchar](50) NULL,
-    [UserNo] [nvarchar](50) NULL,
-    [UserName] [nvarchar](50) NULL,
-    [DeadlineTime] [datetime] NOT NULL,
-    [StartTime] [datetime] NOT NULL,
-    [EndTime] [datetime] NULL,
-    [ContentText] [nvarchar](max) NULL,
-    [Remark] [nvarchar](250) NULL,
-    [GuidNo] [nvarchar](50) NULL,
-    CONSTRAINT [PK_WorkflowMasters] PRIMARY KEY NONCLUSTERED 
+CREATE TABLE [dbo].[WorkflowMasters](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[BaseNo] [nvarchar](50) NULL,
+	[RouteNo] [nvarchar](50) NULL,
+	[SheetNo] [nvarchar](50) NULL,
+	[TargetNo] [nvarchar](50) NULL,
+	[TargetName] [nvarchar](50) NULL,
+	[UnitNo] [nvarchar](50) NULL,
+	[UnitSupervisorNo] [nvarchar](50) NULL,
+	[IsClose] [bit] NOT NULL,
+	[IsApprove] [bit] NOT NULL,
+	[IsReject] [bit] NOT NULL,
+	[StartTime] [datetime] NULL,
+	[EndTime] [datetime] NULL,
+	[DeadlineTime] [datetime] NULL,
+	[ContentText] [nvarchar](max) NULL,
+	[Remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_WorkflowMasters] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
 
-CREATE TABLE [dbo].[WorkflowRoles]
-(
-    [Id] [int] IDENTITY(1,1) NOT NULL,
-    [RoleNo] [nvarchar](50) NULL,
-    [RoleName] [nvarchar](50) NULL,
-    [Remark] [nvarchar](250) NULL,
-    CONSTRAINT [PK_WorkflowRoles] PRIMARY KEY NONCLUSTERED 
+CREATE TABLE [dbo].[WorkflowRoles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IsAgentMode] [bit] NOT NULL,
+	[IsUnitSupervisor] [bit] NOT NULL,
+	[RoleNo] [nvarchar](50) NULL,
+	[RoleName] [nvarchar](50) NULL,
+	[UserNo] [nvarchar](50) NULL,
+	[AgentNo] [nvarchar](50) NULL,
+	[Remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_WorkflowRoles] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
 
-CREATE TABLE [dbo].[WorkflowRoleUsers]
-(
-    [Id] [int] IDENTITY(1,1) NOT NULL,
-    [IsEnabled] [bit] NOT NULL,
-    [RoleNo] [nvarchar](50) NULL,
-    [UserNo] [nvarchar](50) NULL,
-    [AgentNo] [nvarchar](50) NULL,
-    [Remark] [nvarchar](250) NULL,
-    CONSTRAINT [PK_RoleUsers] PRIMARY KEY NONCLUSTERED 
+CREATE TABLE [dbo].[WorkflowRouteDetails](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RouteNo] [nvarchar](50) NULL,
+	[OrderNo] [nvarchar](50) NULL,
+	[RoleNo] [nvarchar](50) NULL,
+	[Remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_WorkflowRouteDetails] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
 
-CREATE TABLE [dbo].[WorkflowRoutes]
+CREATE TABLE [dbo].[WorkflowRoutes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RouteNo] [nvarchar](50) NULL,
+	[RouteName] [nvarchar](50) NULL,
+	[LimitedHour] [int] NOT NULL,
+	[Remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_WorkflowRoutes] PRIMARY KEY NONCLUSTERED 
 (
-    [Id] [int] IDENTITY(1,1) NOT NULL,
-    [PrgNo] [nvarchar](50) NULL,
-    [RouteOrder] [nvarchar](50) NULL,
-    [RoleNo] [nvarchar](50) NULL,
-    [RoleName] [nvarchar](50) NULL,
-    [Remark] [nvarchar](250) NULL,
-    CONSTRAINT [PK_WorkflowRoutes] PRIMARY KEY NONCLUSTERED 
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[WorkflowUnits](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[BaseNo] [nvarchar](50) NULL,
+	[UnitNo] [nvarchar](50) NULL,
+	[UnitName] [nvarchar](50) NULL,
+	[SupervisorNo] [nvarchar](50) NULL,
+	[Remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_WorkflowUnits] PRIMARY KEY NONCLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]

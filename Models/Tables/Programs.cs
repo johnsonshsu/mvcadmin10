@@ -27,6 +27,8 @@ public partial class Programs
 
     public string? LockNo { get; set; }
 
+    public string? RouteNo { get; set; }
+
     public string? AreaName { get; set; }
 
     public string? ControllerName { get; set; }

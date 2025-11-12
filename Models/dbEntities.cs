@@ -1097,6 +1097,8 @@ public partial class dbEntities : DbContext
             entity.Property(e => e.Remark).HasMaxLength(250);
             entity.Property(e => e.RoleNo).HasMaxLength(50);
             entity.Property(e => e.SortNo).HasMaxLength(50);
+            entity.Property(e => e.LockNo).HasMaxLength(50);
+            entity.Property(e => e.RouteNo).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Promotions>(entity =>

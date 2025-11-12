@@ -25,13 +25,15 @@ namespace mvcadmin10.Models
             string str_query = @"
 SELECT Programs.Id, Programs.IsEnabled, Programs.IsPageSize, Programs.IsSearch, Programs.RoleNo, 
 Roles.RoleName, Programs.ModuleNo, Modules.ModuleName, Programs.SortNo, Programs.PrgNo, Programs.PrgName, 
-Programs.CodeNo, vi_CodeProgram.CodeName, Programs.LockNo, vi_CodeFormLock.CodeName AS LockName , 
-Programs.AreaName, Programs.ControllerName, Programs.ActionName, Programs.ParmValue, Programs.Remark 
+Programs.CodeNo, vi_CodeProgram.CodeName, Programs.LockNo, Programs.RouteNo, WorkflowRoutes.RouteName,
+vi_CodeFormLock.CodeName AS LockName , Programs.AreaName, Programs.ControllerName, 
+Programs.ActionName, Programs.ParmValue, Programs.Remark 
 FROM Programs 
 LEFT OUTER JOIN vi_CodeProgram ON Programs.CodeNo = vi_CodeProgram.CodeNo 
 LEFT OUTER JOIN vi_CodeFormLock ON Programs.LockNo = vi_CodeFormLock.CodeNo 
 LEFT OUTER JOIN Modules ON Programs.ModuleNo = Modules.ModuleNo 
-LEFT OUTER JOIN Roles ON Programs.RoleNo = Roles.RoleNo 
+LEFT OUTER JOIN Roles ON Programs.RoleNo = Roles.RoleNo  
+LEFT OUTER JOIN WorkflowRoutes ON Programs.RouteNo = WorkflowRoutes.RouteNo  
 ";
             return str_query;
         }
@@ -43,6 +45,7 @@ LEFT OUTER JOIN Roles ON Programs.RoleNo = Roles.RoleNo
             SearchColumns.Add("Modules.ModuleName");
             SearchColumns.Add("vi_CodeProgram.CodeName");
             SearchColumns.Add("vi_CodeFormLock.CodeName");
+            SearchColumns.Add("WorkflowRoutes.RouteName");
             return SearchColumns;
         }
 

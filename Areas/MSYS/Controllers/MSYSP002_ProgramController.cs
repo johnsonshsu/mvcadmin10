@@ -114,6 +114,7 @@ namespace mvcadmin10.Areas.Mis.Controllers
                 model.SortNo = "";
                 model.CodeNo = "P";
                 model.LockNo = "";
+                model.RouteNo = "";
                 model.AreaName = "User";
                 model.ControllerName = "";
                 model.ActionName = "Init";
@@ -161,6 +162,35 @@ namespace mvcadmin10.Areas.Mis.Controllers
         public override int DeletData(int id = 0)
         {
             using var sqlData = new z_sqlPrograms(); return sqlData.Delete(id);
+        }
+
+        /// <summary>
+        /// 簽核流程
+        /// </summary>
+        /// <param name="id">資料 Id 值</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Login(RoleList = "User")]
+        [Security(Mode = enSecurityMode.Display)]
+        public IActionResult Flow(int id = 0)
+        {
+            //設定目前頁面動作名稱、子動作名稱、動作卡片大小
+            ActionService.SetActionName("簽核流程");
+            ActionService.SetSubActionName();
+            ActionService.SetActionCardSize(enCardSize.Medium);
+            //取得單筆明細資料
+            using var sqlData = new z_sqlPrograms();
+            var model = sqlData.GetData(id);
+            if (model == null)
+            {
+                //找不到資料則返回列表
+                TempData["ErrorMessage"] = "找不到資料!!";
+                return RedirectToAction(ActionService.Index, ActionService.Controller, new { area = ActionService.Area });
+            }
+            //儲存目前的模組編號
+            SessionService.ParentNo = SessionService.BaseNo;
+            string controller = ActionService.Controller + "Flow";
+            return RedirectToAction(ActionService.Init, controller, new { area = ActionService.Area, id = model.PrgNo });
         }
     }
 }
